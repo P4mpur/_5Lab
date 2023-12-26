@@ -24,6 +24,9 @@ public:
     int getInfo(){ return info;};
     Edge* getAdj(){return adj;}
     
+    int getGroup() {return group; }
+    void setGroup(int n) {group = n;}
+
     void addEdge(Node* kraj,int weight);
     void deleteLink(Node* poc, Node* kraj);
 

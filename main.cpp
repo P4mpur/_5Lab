@@ -46,12 +46,12 @@ int main(int argc, char const *argv[])
        
 
     
-    
+
     //obj.traverseNodes();
     
 
     // obj.spojiNasumicno(100);
-    // obj.traverseNodes();
+    obj.traverseNodes();
 
     cout << endl;
 
