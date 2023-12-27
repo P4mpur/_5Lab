@@ -5,6 +5,7 @@
         "ostream": "cpp",
         "new": "cpp",
         "algorithm": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "streambuf": "cpp"
     }
 }

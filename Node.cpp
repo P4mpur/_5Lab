@@ -21,7 +21,27 @@ void Node::setNext(Node *n)
     next = n;
 }
 
-void Node::addEdge(Node* kraj,int weight)
+void Node::insertEdge(Edge *a)
+{
+    if (adj == nullptr)
+    {
+        adj = a;
+    }
+    else
+    {
+        Edge* tp = adj;
+        while (tp->getNext() != nullptr)
+        {
+            if(tp->getSrc()->getInfo() == a->getSrc()->getInfo() && tp->getDest()->getInfo() == a->getDest()->getInfo())
+            tp = tp->getNext();
+        }
+        tp->setNext(a);
+        
+    }
+    
+}
+
+void Node::addEdge(Node *kraj, int weight)
 {
     Edge* prevtp = nullptr;
     Edge* etp = this->adj;
@@ -112,6 +132,19 @@ bool Node::operator==(Node *desni)
     }
     
     return false;
+}
+
+int Node::Count()
+{
+    int i;
+    Node* tp;
+    while (tp!=nullptr)
+    {
+        i++;
+        tp=tp->next;
+    }
+    
+    return i;
 }
 
 Node::~Node()

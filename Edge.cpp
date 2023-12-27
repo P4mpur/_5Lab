@@ -48,7 +48,7 @@ Edge::~Edge()
 {
     if (next != NULL)
     {
-        delete next;
+        //delete next;
     }   
     // if (dest !=NULL)
     // {

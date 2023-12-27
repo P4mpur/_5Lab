@@ -166,6 +166,8 @@ void Graph::Kruskal()
     Edge* pomDest = nullptr;
     bool istina = false;
 
+    vector<Granjke*>::iterator itr;
+
     int spec =0;
     Node* dest;
     Node* src;
@@ -202,11 +204,21 @@ void Graph::Kruskal()
         
 
 
-        //kasnije ces da odlucis da li ces da brises adj ili ne
+        
 
 
         tpNode = tpNode->getNext();
     }
+
+    tpNode = head;
+    //kasnije ces da odlucis da li ces da brises adj ili ne
+    while (tpNode!=nullptr)
+    {
+        tpNode->setAdj(nullptr);
+        tpNode = tpNode->getNext();
+    }
+    
+
     //moras i da ih sortiras
     ///WHAT IS THISSSSSSSSSSS, ovde sam nasao primer ovoga https://www.digitalocean.com/community/tutorials/sorting-a-vector-in-c-plus-plus
     sort(vektor.begin(),vektor.end(), [](Granjke* a, Granjke* b){return (a->weight < b->weight);});
@@ -214,7 +226,7 @@ void Graph::Kruskal()
     //// ---> izbacuju se sad nepotrebni
     
     Granjke *pom;
-    while (i<vektor.size())
+    while (i<head->Count()-1)
     {
         pom = vektor[i++];
 
@@ -224,7 +236,7 @@ void Graph::Kruskal()
         
         
         
-        if (dest->getGroup() == 0 && src->getGroup() == 0 ) // ako su oba nula, oznacavaju se na i+1 //proveri ovo
+        if (dest->getGroup() == 0 && src->getGroup() == 0 )
         {
             dest->setGroup(i); src->setGroup(i);
         }
@@ -273,23 +285,29 @@ void Graph::Kruskal()
         else
         {
             cout << "Ne smem da spojim :  " << dest->getGroup() << " sa " << src->getGroup() << endl;
-            
+            itr = find(vektor.begin(),vektor.end(),pom);
+            cout << "Brisem " << src << " i " << dest << endl; 
+            //itr = vektor.erase(itr);
+        //     delete (*itr)->destGranjka;
+        //    delete (*itr)->srcGranjka;
             continue;
         }
+        cout << "Izaso sam" << endl;
         pom->srcGranjka->setNoted(true);
         pom->destGranjka->setNoted(true);
     }
+   pom = vektor[i];
+    vektor.erase(find(vektor.begin(),vektor.end(),pom),vektor.end());
+       
+    //imas listu onih koji se racunaju, sad treba samo da ih ispovezujes
     
-    
+
     //print provera 
         for (auto &i : vektor)
         {
-            if(i->srcGranjka->getNoted() == false)
-            continue;
             cout << "Source Djavo : " << endl;
             cout << "source : " << i->srcGranjka->getSrc();
             cout << "destination : " << i->srcGranjka->getDest();
-            cout << "weight : " << i->weight << endl; 
             cout << "weight : " << i->weight << endl; 
             
             cout << "  " << endl;
